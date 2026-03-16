@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { AppShell } from "@/components/AppShell";
 import { SectionProvider } from "@/contexts/SectionContext";
 import "./globals.css";
@@ -22,6 +23,7 @@ export default function RootLayout({
           </SectionProvider>
         </div>
       </body>
+      <GoogleAnalytics gaId="G-EZT2Q58P6W" />
     </html>
   );
 }
