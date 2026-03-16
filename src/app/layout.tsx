@@ -23,9 +23,7 @@ export default function RootLayout({
           </SectionProvider>
         </div>
       </body>
-      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-      )}
+      <GoogleAnalytics gaId="G-EZT2Q58P6W" />
     </html>
   );
 }
