@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  transpilePackages: ["@splinetool/react-spline", "@splinetool/runtime"],
   async redirects() {
     return [
       { source: "/work", destination: "/#work", permanent: false },
