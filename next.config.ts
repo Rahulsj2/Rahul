@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  webpack: (config) => {
+    config.resolve.conditionNames = ["import", "require", "browser", "default"];
+    return config;
+  },
   async redirects() {
     return [
       { source: "/work", destination: "/#work", permanent: false },
