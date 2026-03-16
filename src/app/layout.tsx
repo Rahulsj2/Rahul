@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { AppShell } from "@/components/AppShell";
 import { SectionProvider } from "@/contexts/SectionContext";
 import "./globals.css";
@@ -22,6 +23,9 @@ export default function RootLayout({
           </SectionProvider>
         </div>
       </body>
+      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      )}
     </html>
   );
 }
