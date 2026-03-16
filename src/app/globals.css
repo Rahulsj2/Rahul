@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — docs/DESIGN_DOCUMENT.md
+ * Semantic names; no pure black for text (comfort).
+ */
+:root {
+  /* SF Pro on Apple devices, Helvetica Neue elsewhere */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f5f5f7;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-accent: #0071e3;
+  --color-border: #d2d2d7;
+  /* Liquid glass nav — glossy surface, slightly darker grey tint */
+  --glass-gloss-top: rgba(242, 242, 245, 0.92);
+  --glass-gloss-mid: rgba(232, 233, 237, 0.8);
+  --glass-gloss-bottom: rgba(222, 223, 228, 0.75);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --glass-active-bg: rgba(210, 212, 218, 0.9);
+  /* Custom cursor — corner bracket with white border for visibility on light and dark */
+  --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 2 2, auto;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 2 2, pointer;
+}
+
+/* Focus visible for keyboard (accessibility) */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-accent;
+}
+
+/* Inactive nav links: text-only hover, no pill background */
+.glass-pill a:not(.glass-pill-active) {
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.glass-pill a:not(.glass-pill-active):hover {
+  background: transparent;
+}
+
+/* Liquid glass surface — glossy gradient distinct from page, blur, rim highlight */
+.glass-pill {
+  background: linear-gradient(
+    180deg,
+    var(--glass-gloss-top) 0%,
+    var(--glass-gloss-mid) 50%,
+    var(--glass-gloss-bottom) 100%
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-highlight),
+    inset 0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.04);
+}
+.glass-pill-active {
+  background: var(--glass-active-bg);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Work section — dots are the scroll indicator; hide native scrollbar */
+.work-section-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.work-section-scroll::-webkit-scrollbar {
+  display: none;
+}
+/* Mobile: center 356px cards in viewport when snapping */
+@media (max-width: 767px) {
+  .work-section-scroll {
+    padding-left: max(0px, (100% - 356px) / 2);
+    padding-right: max(0px, (100% - 356px) / 2);
+  }
+}
+
+/* Work scroll progress indicator — 4 items: dot (8×8) or pill (48×8), 8px gap between */
+.scroll-indicator-track {
+  gap: 8px;
+}
+.scroll-indicator-item {
+  flex-shrink: 0;
+}
+.scroll-indicator-item.scroll-indicator-dot {
+  opacity: 0.6;
+}
+.scroll-indicator-item.scroll-indicator-dot:hover {
+  opacity: 0.85;
+  transform: scale(1.1);
+}
+.scroll-indicator-item.scroll-indicator-pill {
+  background-color: var(--color-text-secondary);
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.15);
+}
+.scroll-indicator-item {
+  transition: width 480ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease, transform 200ms ease;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background-primary text-foreground-primary antialiased;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+    cursor: var(--cursor-default);
+  }
+  a,
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"] {
+    cursor: var(--cursor-pointer);
+  }
+}
