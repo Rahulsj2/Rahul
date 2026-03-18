@@ -81,7 +81,7 @@ export default function HomePage() {
                 <div className="work-group flex-shrink-0 snap-center snap-always flex items-stretch justify-center" aria-hidden>
                   <div className="work-card group w-[356px] h-[490px] md:w-[1260px] md:h-[690px] rounded-[28px] overflow-hidden bg-white relative">
                     <img
-                      src="/images/fluxhero.png"
+                      src="/images/fluxthumb.gif"
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover"
                       aria-hidden
