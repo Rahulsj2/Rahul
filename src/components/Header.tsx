@@ -24,6 +24,22 @@ export function Header() {
     setMenuOpen(false);
   }
 
+  function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    const id = href.slice(1);
+    const container = document.getElementById("scroll-container");
+    const target = document.getElementById(id);
+    if (!container) return;
+    if (!target) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const containerTop = container.getBoundingClientRect().top;
+    const targetTop = target.getBoundingClientRect().top;
+    container.scrollBy({ top: targetTop - containerTop, behavior: "smooth" });
+  }
+
   const pillClass = isDark
     ? "bg-white/10 backdrop-blur-xl border border-white/10 rounded-full shadow-lg"
     : "glass-pill";
@@ -50,6 +66,7 @@ export function Header() {
                 <li key={id}>
                   <a
                     href={linkHref}
+                    onClick={(e) => scrollToSection(e, href)}
                     className={`${baseLinkClass} ${
                       isActive ? activeClass : inactiveClass
                     }`}
@@ -94,7 +111,7 @@ export function Header() {
                 <li key={id}>
                   <a
                     href={linkHref}
-                    onClick={closeMenu}
+                    onClick={(e) => { scrollToSection(e, href); closeMenu(); }}
                     className={`${baseLinkClass} justify-start w-full rounded-xl ${
                       isActive ? activeClass : inactiveClass
                     }`}
