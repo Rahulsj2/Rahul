@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { AppShell } from "@/components/AppShell";
 import { SectionProvider } from "@/contexts/SectionContext";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({
       </head>
       <body className="h-screen h-[100dvh] overflow-hidden font-sans flex flex-col bg-background-primary">
         <div id="scroll-container" className="h-full overflow-y-auto overflow-x-hidden">
+          <ScrollToTop />
           <SectionProvider>
             <AppShell>{children}</AppShell>
           </SectionProvider>
