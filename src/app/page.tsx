@@ -38,7 +38,7 @@ export default function HomePage() {
                 </h1>
               </div>
 
-              {/* Group 2: Prototyping line + bio paragraph */}
+              {/* Group 2: Prototyping line + bio paragraphh */}
               <div className="flex flex-col gap-md">
                 <p className="text-[4.5rem] font-light tracking-tight leading-[1.1]" style={{ color: "#1d1d1f" }}>
                   Designing A11y experiences for iOS <br /> and enterprise tools
