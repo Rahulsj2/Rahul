@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { AppShell } from "@/components/AppShell";
 import { SectionProvider } from "@/contexts/SectionContext";
 import "./globals.css";
@@ -16,6 +16,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-EZT2Q58P6W"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EZT2Q58P6W');
+          `}
+        </Script>
+      </head>
       <body className="h-screen h-[100dvh] overflow-hidden font-sans flex flex-col bg-background-primary">
         <div id="scroll-container" className="h-full overflow-y-auto overflow-x-hidden">
           <SectionProvider>
@@ -23,7 +37,6 @@ export default function RootLayout({
           </SectionProvider>
         </div>
       </body>
-      <GoogleAnalytics gaId="G-EZT2Q58P6W" />
     </html>
   );
 }

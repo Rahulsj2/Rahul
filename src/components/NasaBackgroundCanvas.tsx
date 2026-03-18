@@ -13,21 +13,21 @@ export function NasaBackgroundCanvas() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = canvas.clientWidth;
-    let height = canvas.clientHeight;
+    let width = canvas!.clientWidth;
+    let height = canvas!.clientHeight;
 
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
+    canvas!.width = width * dpr;
+    canvas!.height = height * dpr;
+    ctx!.scale(dpr, dpr);
 
     function resize() {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
+      width = canvas!.clientWidth;
+      height = canvas!.clientHeight;
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     const handleResize = () => {
@@ -37,14 +37,14 @@ export function NasaBackgroundCanvas() {
     window.addEventListener("resize", handleResize);
 
     function render() {
-      ctx.clearRect(0, 0, width, height);
+      ctx!.clearRect(0, 0, width, height);
 
       // background to match hero #1A1A1C
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      const gradient = ctx!.createLinearGradient(0, 0, width, height);
       gradient.addColorStop(0, "#1A1A1C");
       gradient.addColorStop(1, "#1A1A1C");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      ctx!.fillStyle = gradient;
+      ctx!.fillRect(0, 0, width, height);
 
       animationFrameId = window.requestAnimationFrame(render);
     }

@@ -13,13 +13,13 @@ export function NasaConvergingDots() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = canvas.clientWidth;
-    let height = canvas.clientHeight;
+    let width = canvas!.clientWidth;
+    let height = canvas!.clientHeight;
 
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
+    canvas!.width = width * dpr;
+    canvas!.height = height * dpr;
+    ctx!.scale(dpr, dpr);
 
     const CHIP_COUNT = 1400;
     const chipBaseColor = "rgba(210, 218, 228, ";
@@ -63,16 +63,16 @@ export function NasaConvergingDots() {
     }
 
     function resize() {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
+      width = canvas!.clientWidth;
+      height = canvas!.clientHeight;
       magnetX = width * 0.5;
       magnetY = height * 0.5;
       maxRadius = Math.min(width, height) * 0.68;
       ringRadius = Math.min(width, height) * 0.56;
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     window.addEventListener("resize", resize);

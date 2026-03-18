@@ -469,28 +469,28 @@ export function A11yDriveCardAnimation() {
       const dt = clamp((ts - lastTs) / 1000, 0, 0.05);
       lastTs = ts;
 
-      ctx.clearRect(0, 0, W, H);
-      drawGround(ctx);
+      ctx!.clearRect(0, 0, W, H);
+      drawGround(ctx!);
       const { x, bobY, speed, wheelAngle, tilt, alpha, phase, headTurn } =
         getState(t);
       spawnDust(x, bobY, speed, phase, dt, particles, exhausts);
 
       for (let i = particles.length - 1; i >= 0; i--) {
         particles[i].update(dt);
-        particles[i].draw(ctx);
+        particles[i].draw(ctx!);
         if (particles[i].life <= 0) particles.splice(i, 1);
       }
       for (let i = exhausts.length - 1; i >= 0; i--) {
         exhausts[i].update(dt);
-        exhausts[i].draw(ctx);
+        exhausts[i].draw(ctx!);
         if (exhausts[i].life <= 0) exhausts.splice(i, 1);
       }
 
       const sc = ICON_SCALE;
       const iconCX = x - 42 * sc + WHEEL_LOCAL_X * sc;
-      drawShadow(ctx, iconCX, speed, alpha);
+      drawShadow(ctx!, iconCX, speed, alpha);
       if (alpha > 0) {
-        drawIcon(ctx, x, bobY, wheelAngle, tilt, alpha, speed, headTurn);
+        drawIcon(ctx!, x, bobY, wheelAngle, tilt, alpha, speed, headTurn);
       }
       if (t > SEQ.EXIT.e + 0.5) {
         startTime = null;
