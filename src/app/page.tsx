@@ -44,7 +44,8 @@ export default function HomePage() {
                   Designing A11y experiences for iOS <br /> and enterprise tools
                 </p>
                 <p className="text-body leading-relaxed max-w-2xl" style={{ color: "#1d1d1f" }}>
-                  A UX engineer focused on bringing early-stage ideas to life — designing and prototyping AI-assisted platforms and consumer workflows with a systems mindset and an appreciation for technical constraints.
+                Designer with a <span className="underline text-gray-500">technical foundation</span> specializing in <span className="underline text-gray-500">accessible experiences</span> from the ground up 
+                across <span className="underline text-gray-500">iOS products</span>, <span className="underline text-gray-500">enterprise tools</span>, and <span className="underline text-gray-500">AI systems</span>. 
                 </p>
               </div>
 
