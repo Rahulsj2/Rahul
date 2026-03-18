@@ -13,12 +13,18 @@ export function SectionSpy({ children }: { children: ReactNode }) {
   const rafRef = useRef<number | null>(null);
   const tickingRef = useRef(false);
 
-  // Reset scroll to top before paint on mount/refresh so the page doesn’t appear slightly scrolled
+  // Reset scroll to top on mount/refresh — run immediately and again after
+  // the browser finishes any hash-anchor or scroll-restoration scrolling.
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     const scrollEl = document.getElementById("scroll-container");
     if (scrollEl) scrollEl.scrollTop = 0;
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    // Double-reset: browsers may anchor-scroll asynchronously after layout
+    const raf = requestAnimationFrame(() => {
+      if (scrollEl) scrollEl.scrollTop = 0;
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
