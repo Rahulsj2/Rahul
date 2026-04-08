@@ -20,10 +20,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/#credo"
                   className="text-caption text-foreground-secondary hover:text-foreground-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 rounded-sm"
                 >
-                  About
+                  Design credo
                 </Link>
               </li>
               <li>

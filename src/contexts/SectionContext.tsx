@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-const SECTION_IDS = ["home", "work", "about", "contact"];
+const SECTION_IDS = ["home", "work", "credo", "contact"];
 
 type SectionContextValue = {
   activeSectionId: string;

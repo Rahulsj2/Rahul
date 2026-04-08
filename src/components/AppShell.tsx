@@ -6,9 +6,12 @@ import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isNasaPage = pathname.startsWith("/nasa");
-
-  if (!isNasaPage) {
+  const isDarkPage =
+    pathname.startsWith("/nasa") ||
+    pathname.startsWith("/flux") ||
+    pathname.startsWith("/challenge-visuals") ||
+    pathname.startsWith("/findings-visuals");
+  if (!isDarkPage) {
     return (
       <>
         <Header />

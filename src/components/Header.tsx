@@ -8,8 +8,8 @@ import { useSection } from "@/contexts/SectionContext";
 const navLinks = [
   { href: "#home", id: "home", label: "Home" },
   { href: "#work", id: "work", label: "Work" },
-  { href: "#about", id: "about", label: "About" },
-  { href: "mailto:srinivasrahul@icloud.com", id: "contact-link", label: "Contact" },
+  { href: "#credo", id: "credo", label: "Credo" },
+  { href: "mailto:design@rahulsrinivas.com", id: "contact-link", label: "Contact" },
 ] as const;
 
 const baseLinkClass =
@@ -18,7 +18,13 @@ const baseLinkClass =
 export function Header() {
   const { activeSectionId } = useSection();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isDark = usePathname().startsWith("/nasa");
+  const pathname = usePathname();
+  const isDark =
+    pathname.startsWith("/nasa") ||
+    pathname.startsWith("/flux") ||
+    pathname.startsWith("/challenge-visuals") ||
+    pathname.startsWith("/findings-visuals");
+  const isHomePage = pathname === "/";
 
   function closeMenu() {
     setMenuOpen(false);
@@ -26,6 +32,7 @@ export function Header() {
 
   function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     if (!href.startsWith("#")) return;
+    if (!isHomePage) return;
     e.preventDefault();
     const id = href.slice(1);
     const container = document.getElementById("scroll-container");
@@ -41,7 +48,7 @@ export function Header() {
   }
 
   const pillClass = isDark
-    ? "bg-white/10 backdrop-blur-xl border border-white/10 rounded-full shadow-lg"
+    ? "bg-black/55 backdrop-blur-xl rounded-full shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_60px_rgba(0,0,0,0.45)]"
     : "glass-pill";
   const activeClass = isDark
     ? "bg-white/20 text-white focus-visible:outline-white"
@@ -61,7 +68,7 @@ export function Header() {
           >
             {navLinks.map(({ href, id, label }) => {
               const isActive = activeSectionId === id;
-              const linkHref = isDark && href.startsWith("#") ? `/${href}` : href;
+              const linkHref = !isHomePage && href.startsWith("#") ? `/${href}` : href;
               return (
                 <li key={id}>
                   <a
@@ -106,7 +113,7 @@ export function Header() {
           >
             {navLinks.map(({ href, id, label }) => {
               const isActive = activeSectionId === id;
-              const linkHref = isDark && href.startsWith("#") ? `/${href}` : href;
+              const linkHref = !isHomePage && href.startsWith("#") ? `/${href}` : href;
               return (
                 <li key={id}>
                   <a

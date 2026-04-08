@@ -3,7 +3,7 @@
 import { useSection } from "@/contexts/SectionContext";
 import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 
-const SECTION_IDS = ["home", "work", "about"];
+const SECTION_IDS = ["home", "work", "credo"];
 
 export function SectionSpy({ children }: { children: ReactNode }) {
   const { setActiveSectionId } = useSection();

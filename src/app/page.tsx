@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CredoBlock } from "@/components/CredoBlock";
 import { SectionSpy } from "@/components/SectionSpy";
 import { WorkScrollIndicator } from "@/components/WorkScrollIndicator";
 import { WorkSectionScroll } from "@/components/WorkSectionScroll";
@@ -13,19 +14,23 @@ export const metadata = {
 const sections = [
   { id: "home", label: "Home", bg: "bg-background-primary" },
   { id: "work", label: "Work", bg: "bg-gray-100" },
+  { id: "credo", label: "Design credo", bg: "bg-background-primary" },
 ] as const;
 
 export default function HomePage() {
   return (
     <SectionSpy>
+      <div className="home-sections-anim">
       {sections.map(({ id, label, bg }) => (
         <section
           key={id}
           id={id}
-          className={`w-full ${bg} flex items-center justify-center box-border ${
+          className={`w-full ${bg} flex box-border ${
             id === "work"
-              ? "min-h-[90vh] min-h-[90dvh] md:min-h-[120vh] md:min-h-[120dvh]"
-              : "min-h-[90vh] min-h-[90dvh] md:min-h-screen md:min-h-[100dvh]"
+              ? "min-h-[90vh] min-h-[90dvh] md:min-h-[120vh] md:min-h-[120dvh] items-center justify-center"
+              : id === "credo"
+                ? "items-start justify-center pt-12 pb-16 md:pt-16 md:pb-20"
+                : "min-h-[90vh] min-h-[90dvh] md:min-h-screen md:min-h-[100dvh] items-center justify-center"
           }`}
           aria-labelledby={`${id}-heading`}
         >
@@ -80,7 +85,11 @@ export default function HomePage() {
                 {/* Leading spacer: 126px before first card */}
                 <div className="flex-shrink-0 w-[126px] shrink-0" aria-hidden style={{ minWidth: 126 }} />
                 <div className="work-group flex-shrink-0 snap-center snap-always flex items-stretch justify-center" aria-hidden>
-                  <div className="work-card group w-[356px] h-[490px] md:w-[1260px] md:h-[690px] rounded-[28px] overflow-hidden bg-white relative">
+                  <Link
+                    href="/flux"
+                    className="work-card group w-[356px] h-[490px] md:w-[1260px] md:h-[690px] rounded-[28px] overflow-hidden bg-white relative focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black focus-visible:ring-offset-background-primary"
+                    aria-label="Open Flux Agents project case study"
+                  >
                     <video
                       src="/images/fluxthumb.mp4"
                       className="absolute inset-0 w-full h-full object-cover"
@@ -94,9 +103,9 @@ export default function HomePage() {
                       aria-hidden
                       className="pointer-events-none absolute inset-x-4 bottom-4 text-[0.8rem] text-white/90 opacity-0 transition-opacity duration-150 group-hover:opacity-100 text-left"
                     >
-                      Coming soon.
+                      Flux Agents case study.
                     </div>
-                  </div>
+                  </Link>
                 </div>
                 <div
                   className="work-group flex-shrink-0 w-[356px] h-[490px] md:w-[1260px] md:h-[690px] snap-center snap-always flex items-stretch gap-[24px]"
@@ -130,7 +139,11 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="work-group flex-shrink-0 snap-center snap-always flex items-stretch justify-center" aria-hidden>
-                  <div className="work-card group w-[356px] h-[490px] md:w-[1260px] md:h-[690px] rounded-[28px] overflow-hidden bg-white relative flex items-center justify-center">
+                  <Link
+                    href="/apple"
+                    className="work-card group w-[356px] h-[490px] md:w-[1260px] md:h-[690px] rounded-[28px] overflow-hidden bg-white relative flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black focus-visible:ring-offset-background-primary"
+                    aria-label="Open Apple experience"
+                  >
                     <img
                       src="https://cdn.simpleicons.org/apple/737373"
                       alt=""
@@ -143,14 +156,18 @@ export default function HomePage() {
                       aria-hidden
                       className="pointer-events-none absolute inset-x-4 bottom-4 text-[0.8rem] text-black opacity-0 transition-opacity duration-150 group-hover:opacity-100 text-center"
                     >
-                      More case studies coming soon.
+                      Apple experience.
                     </div>
-                  </div>
+                  </Link>
                 </div>
                 {/* Trailing spacer: 126px after last card */}
                 <div className="flex-shrink-0 w-[126px] shrink-0" aria-hidden style={{ minWidth: 126 }} />
               </WorkSectionScroll>
               <WorkScrollIndicator />
+            </div>
+          ) : id === "credo" ? (
+            <div className="flex w-full justify-center px-xs lg:px-sm">
+              <CredoBlock as="h2" id={`${id}-heading`} />
             </div>
           ) : (
             <div className="mx-auto w-full max-w-content-wide px-xs py-2xl lg:px-sm flex flex-col justify-center items-center gap-2xl">
@@ -160,13 +177,11 @@ export default function HomePage() {
               <div className="w-full max-w-2xl">
                 <DriveOffAnimation />
               </div>
-              <p className="text-body text-foreground-secondary text-center">
-                Section content goes here.
-              </p>
             </div>
           )}
         </section>
       ))}
+      </div>
     </SectionSpy>
   );
 }
