@@ -460,6 +460,46 @@ export default function FluxPage() {
         </div>
       </section>
 
+      {/* Pickup queue — full-width dash card (same spacing rhythm as other design blocks) */}
+      <section className="relative z-10 w-full min-h-[720px] bg-[#0D0D0E] flex justify-center text-white">
+        <div className="mx-[9px] px-5 w-full py-24 flex flex-col gap-10">
+          <div className="grid w-full grid-cols-12 gap-lg text-left">
+            <div className="col-span-12 md:col-span-2 px-[10px]">
+              <div className="flex h-full items-start">
+                <div className="w-full" />
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-8 px-[10px]">
+              <div className="flex h-full items-start">
+                <div className="w-full md:pl-28 mb-6">
+                  <DesignSectionHeadline
+                    line1="The pickup queue, at a glance."
+                    line2=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-2 px-[10px]">
+              <div className="flex h-full items-start">
+                <div className="w-full" />
+              </div>
+            </div>
+          </div>
+          <div className="flex w-full flex-col items-center gap-8">
+            <DashStyleMediaCard
+              src="/images/pickup%20dash.png"
+              alt="Design exploration — pickup dash in the product"
+            />
+            <div className="max-w-2xl text-center space-y-3">
+              <p className={body}>
+                Pickup queue view allowing agents to see all pickup requests in one place and make
+                decisions based on the most efficient route.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Design implementation — NASA twin cards */}
       <section className="relative z-10 w-full min-h-[720px] bg-black flex flex-col text-white">
         <div className="h-8 w-full shrink-0 bg-gradient-to-b from-[#0D0D0E] to-black" aria-hidden />
@@ -510,46 +550,6 @@ export default function FluxPage() {
                   Allowing users to get live updates on the status of their shipments and pickups.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pickup queue — full-width dash card (same spacing rhythm as other design blocks) */}
-      <section className="relative z-10 w-full min-h-[720px] bg-[#0D0D0E] flex justify-center text-white">
-        <div className="mx-[9px] px-5 w-full py-24 flex flex-col gap-10">
-          <div className="grid w-full grid-cols-12 gap-lg text-left">
-            <div className="col-span-12 md:col-span-2 px-[10px]">
-              <div className="flex h-full items-start">
-                <div className="w-full" />
-              </div>
-            </div>
-            <div className="col-span-12 md:col-span-8 px-[10px]">
-              <div className="flex h-full items-start">
-                <div className="w-full md:pl-28 mb-6">
-                  <DesignSectionHeadline
-                    line1="The pickup queue, at a glance."
-                    line2=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-span-12 md:col-span-2 px-[10px]">
-              <div className="flex h-full items-start">
-                <div className="w-full" />
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col items-center gap-8">
-            <DashStyleMediaCard
-              src="/images/pickup%20dash.png"
-              alt="Design exploration — pickup dash in the product"
-            />
-            <div className="max-w-2xl text-center space-y-3">
-              <p className={body}>
-                Pickup queue view allowing agents to see all pickup requests in one place and make
-                decisions based on the most efficient route.
-              </p>
             </div>
           </div>
         </div>
