@@ -89,7 +89,7 @@ export function AppleCaseStudyContent() {
             {[
               [
                 "01",
-                "Designed a performance systems for retail teams built around visibility, ownership and feedback loops leadership could act on.",
+                "Designed performance systems for retail teams built around visibility, ownership and feedback loops leadership could act on.",
               ],
               [
                 "02",
