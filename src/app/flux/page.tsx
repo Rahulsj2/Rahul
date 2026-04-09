@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
 
 import { A11yImageCallouts } from "@/components/A11yImageCallouts";
 import { A11yIterationsCard } from "@/components/A11yIterationsCard";
+import { AnimatedGoalsList } from "@/components/AnimatedGoalsList";
 
 export const metadata = {
   title: "Flux Agents",
@@ -200,9 +200,10 @@ export default function FluxPage() {
               <h3 className={`${h3} mb-4`}>Challenge</h3>
               <div className="mt-4 pb-[40px]">
                 <p className={body}>
-                The real problem wasn&apos;t digitization. Agents were making high-stakes routing
-                decisions every day without enough context — juggling WhatsApp, calls, and mental
-                maps of distance and timing.
+                  The core issue wasn&apos;t digitizing pickups it was supporting high stakes
+                  decisions with incomplete context. Agents were committing to routes while
+                  juggling WhatsApp threads, phone calls, and mental maps of distance, capacity,
+                  and timing leading to avoidable conflicts and coordination churn.
                 </p>
               </div>
             </div>
@@ -245,28 +246,28 @@ export default function FluxPage() {
                   {
                     n: "01",
                     t: "Decision overload",
-                    d: "high-impact routing calls without enough context.",
+                    d: "Agents accepted routes without a reliable view of distance, time windows, and conflicts.",
                     tint: "bg-amber-300/12 border-amber-200/15",
                     icon: "bg-amber-300/25 border-amber-200/25",
                   },
                   {
                     n: "02",
                     t: "Capacity blindness",
-                    d: "no view of load and schedule led to missed commitments.",
+                    d: "No quick way to see workload across the day, causing missed or overbooked commitments.",
                     tint: "bg-lime-200/10 border-lime-200/15",
                     icon: "bg-lime-200/22 border-lime-200/25",
                   },
                   {
                     n: "03",
                     t: "Communication gap",
-                    d: "reactive updates and missed calls eroded trust.",
+                    d: "Updates were reactive; missed calls and unclear ownership reduced trust with customers.",
                     tint: "bg-sky-300/10 border-sky-200/15",
                     icon: "bg-sky-300/20 border-sky-200/25",
                   },
                   {
                     n: "04",
                     t: "Constraints",
-                    d: "solutions need to be low friction, and workwith minimal training.",
+                    d: "The solution had to be low-friction, fast on mobile, and usable with minimal training.",
                     tint: "bg-fuchsia-300/10 border-fuchsia-200/15",
                     icon: "bg-fuchsia-300/20 border-fuchsia-200/25",
                   },
@@ -294,22 +295,14 @@ export default function FluxPage() {
               </div>
 
               <h3 className={`${h3} mt-16 mb-4 md:mt-20`}>Goals</h3>
-              <ul className="m-0 list-none space-y-4 p-0">
-                {[
+              <AnimatedGoalsList
+                bodyClassName={body}
+                goals={[
                   "Reduce cognitive load at the moment of decision.",
                   "Help agents assess feasibility without relying on memory.",
                   "Improve coordination and transparency from agents.",
-                ].map((text) => (
-                  <li key={text} className="flex gap-3">
-                    <CheckCircle2
-                      className="mt-0.5 h-5 w-5 shrink-0 text-white/55"
-                      strokeWidth={1.75}
-                      aria-hidden
-                    />
-                    <p className={`m-0 ${body}`}>{text}</p>
-                  </li>
-                ))}
-              </ul>
+                ]}
+              />
             </div>
             <div className="col-span-12 md:col-span-2 px-[10px]" />
           </div>
@@ -417,7 +410,8 @@ export default function FluxPage() {
               alt="Iterations and groupings — overview in the product"
             />
             <p className="max-w-2xl text-center text-[0.958rem] leading-relaxed text-white/80">
-              Able to browse and view all shipment information in one place before making a decision.
+              A single place to review shipments before committing so agents don’t rely on memory
+              or scattered messages.
             </p>
           </div>
         </div>
@@ -453,8 +447,8 @@ export default function FluxPage() {
               alt="Product overview — zones in the product"
             />
             <p className="max-w-2xl text-center text-[0.958rem] leading-relaxed text-white/80">
-            System generated suggested pickup groupings and schedules, agents 
-            to make pickup decisions more efficiently and confidently, with fewer conflicts  
+              System suggested pickup groupings surface route feasibility and conflicts upfront,
+              helping agents commit faster with fewer scheduling collisions.
             </p>
           </div>
         </div>
@@ -492,8 +486,8 @@ export default function FluxPage() {
             />
             <div className="max-w-2xl text-center space-y-3">
               <p className={body}>
-                Pickup queue view allowing agents to see all pickup requests in one place and make
-                decisions based on the most efficient route.
+                A prioritized pickup queue makes the next best decision obvious: what to take, what
+                to defer, and why.
               </p>
             </div>
           </div>
@@ -523,7 +517,8 @@ export default function FluxPage() {
                   </div>
                 </div>
                 <p className={`mt-4 w-full ${body}`}>
-                  Scheduling pickup times putting agents in control of their time and workload.
+                  Agents claim and schedule pickups in seconds, balancing time windows and personal
+                  capacity without back-and-forth coordination.
                 </p>
               </div>
               <div className="flex w-full flex-col items-stretch md:col-span-7">
@@ -547,7 +542,8 @@ export default function FluxPage() {
                   </div>
                 </div>
                 <p className={`mt-4 w-full text-center ${body}`}>
-                  Allowing users to get live updates on the status of their shipments and pickups.
+                  Fast status updates keep customers and ops aligned, reducing “where is it?”
+                  follow-ups and missed handoffs.
                 </p>
               </div>
             </div>
@@ -568,7 +564,7 @@ export default function FluxPage() {
               <div className="flex h-full items-start">
                 <div className="w-full md:pl-28 mb-6">
                   <DesignSectionHeadline
-                    line1="Performance at a Glance "
+                    line1="Performance at a glance."
                     line2=""
                   />
                 </div>
@@ -583,8 +579,8 @@ export default function FluxPage() {
           <div className="flex w-full flex-col items-center gap-8">
             <DashStyleMediaCard alt="Case study wide composition — dash flow in the product" />
             <p className="max-w-2xl text-center text-[0.958rem] leading-relaxed text-white/80">
-            Dashboard showing activtity and metrics for agents allowing them to quickly 
-            assess their performance and identify areas for improvement.
+              A lightweight dashboard highlights activity and exceptions so agents can correct the
+              day early, not after problems cascade.
             </p>
           </div>
         </div>
