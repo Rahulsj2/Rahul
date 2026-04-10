@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export const metadata = {
   title: "Micro experiments",
   description: "Micro experiments — fast tests, evidence, and decisions shipped.",
@@ -36,10 +38,21 @@ function WireframeWeb({
   const fill = "#0D0D0E";
   const surface = "#151518";
   const muted = "#1E1E20";
+  const accent = "#3b82f6";
+  const warn = "#f59e0b";
+  const danger = "#ef4444";
 
-  const TopBar = () => (
+  const TopBar = ({ fullWidth = false }: { fullWidth?: boolean }) => (
     <>
-      <rect x="20" y="16" width="680" height="36" rx="10" fill={surface} stroke={stroke} />
+      <rect
+        x={fullWidth ? 20 : 20}
+        y="16"
+        width={fullWidth ? 680 : 680}
+        height="36"
+        rx="10"
+        fill={surface}
+        stroke={stroke}
+      />
       <rect x="32" y="28" width="140" height="8" rx="4" fill={muted} />
       <rect x="600" y="28" width="84" height="8" rx="4" fill={muted} />
     </>
@@ -55,43 +68,162 @@ function WireframeWeb({
     </>
   );
 
-  const TableRows = ({ withBadges = false, grouped = false }: { withBadges?: boolean; grouped?: boolean }) => (
+  /** Plain table — full width (no sidebar). */
+  const FullWidthRows = ({ count = 8 }: { count?: number }) => (
     <>
-      {Array.from({ length: 7 }).map((_, i) => {
-        const y = 128 + i * 34 + (grouped && i >= 3 ? 18 : 0);
+      {Array.from({ length: count }).map((_, i) => {
+        const y = 118 + i * 30;
         return (
           <g key={i}>
-            <rect x="206" y={y} width="494" height="26" rx="10" fill={surface} stroke={stroke} />
-            <rect x="222" y={y + 9} width="150" height="8" rx="4" fill={muted} />
-            <rect x="382" y={y + 9} width="92" height="8" rx="4" fill={muted} />
-            {withBadges ? (
-              <rect x="608" y={y + 7} width="72" height="12" rx="6" fill={muted} />
-            ) : (
-              <rect x="620" y={y + 9} width="60" height="8" rx="4" fill={muted} />
-            )}
+            <rect x="28" y={y} width="664" height="24" rx="8" fill={surface} stroke={stroke} />
+            <rect x="40" y={y + 8} width="120" height="6" rx="3" fill={muted} />
+            <rect x="200" y={y + 8} width="200" height="6" rx="3" fill={muted} />
+            <rect x="620" y={y + 8} width="56" height="6" rx="3" fill={muted} />
           </g>
         );
       })}
-      {grouped ? (
-        <>
-          <rect x="206" y="112" width="120" height="10" rx="5" fill={muted} />
-          <rect x="206" y="246" width="120" height="10" rx="5" fill={muted} />
-        </>
-      ) : null}
     </>
   );
 
-  const Chips = ({ count = 4 }: { count?: number }) => (
-    <>
-      {Array.from({ length: count }).map((_, i) => (
-        <rect key={i} x={206 + i * 96} y={64} width={84} height={22} rx={11} fill={surface} stroke={stroke} />
+  /** Standard main-area rows (with sidebar), optional status treatment. */
+  const MainRows = ({
+    startY = 128,
+    count = 6,
+    rowWidth = 494,
+    status = "none" as "none" | "icons" | "labels" | "a11y",
+    priorityFirst = false,
+  }: {
+    startY?: number;
+    count?: number;
+    rowWidth?: number;
+    status?: "none" | "icons" | "labels" | "a11y";
+    priorityFirst?: boolean;
+  }) => {
+    const gap = 8;
+    const rows: ReactNode[] = [];
+    let y = startY;
+    const x0 = 206;
+    const statusX = x0 + rowWidth - 24;
+
+    for (let i = 0; i < count; i += 1) {
+      const isFirst = priorityFirst && i === 0;
+      const h = isFirst ? 42 : 26;
+      const cy = isFirst ? y + 21 : y + 13;
+
+      rows.push(
+        <g key={i}>
+          {isFirst ? (
+            <rect
+              x={x0}
+              y={y}
+              width={rowWidth}
+              height={h}
+              rx="12"
+              fill="#121214"
+              stroke={warn}
+              strokeWidth="1.5"
+            />
+          ) : (
+            <rect x={x0} y={y} width={rowWidth} height={h} rx="10" fill={surface} stroke={stroke} />
+          )}
+          <rect x={x0 + 16} y={y + (isFirst ? 16 : 9)} width="140" height="8" rx="4" fill={isFirst ? "#2a2418" : muted} />
+          <rect x={x0 + 170} y={y + (isFirst ? 16 : 9)} width="100" height="8" rx="4" fill={muted} />
+          {status === "icons" && (
+            <g>
+              <circle cx={statusX - 36} cy={cy} r="6" fill={muted} stroke={stroke} />
+              <circle cx={statusX - 20} cy={cy} r="6" fill={muted} stroke={stroke} />
+              <circle cx={statusX - 4} cy={cy} r="6" fill={muted} stroke={stroke} />
+            </g>
+          )}
+          {status === "labels" && (
+            <rect
+              x={x0 + rowWidth - 112}
+              y={y + (isFirst ? 12 : 7)}
+              width="96"
+              height="14"
+              rx="7"
+              fill="#252528"
+              stroke={stroke}
+            />
+          )}
+          {status === "none" && !isFirst && (
+            <rect x={x0 + rowWidth - 76} y={y + 9} width="60" height="8" rx="4" fill={muted} />
+          )}
+          {status === "a11y" && (
+            <rect
+              x={x0 + rowWidth - 120}
+              y={y + (isFirst ? 12 : 7)}
+              width="104"
+              height="14"
+              rx="7"
+              fill="#1e293b"
+              stroke={accent}
+              strokeWidth="0.8"
+            />
+          )}
+        </g>
+      );
+      y += h + gap;
+    }
+    return <>{rows}</>;
+  };
+
+  const MapZones = () => (
+    <g>
+      <rect x="206" y="64" width="200" height="300" rx="14" fill={surface} stroke={stroke} />
+      <rect x="216" y="78" width="52" height="8" rx="4" fill={muted} opacity="0.85" />
+      <rect x="220" y="100" width="76" height="64" rx="8" fill={muted} stroke={stroke} />
+      <rect x="308" y="100" width="84" height="48" rx="8" fill={muted} stroke={stroke} />
+      <rect x="220" y="176" width="100" height="52" rx="8" fill={muted} stroke={stroke} />
+      <rect x="332" y="168" width="60" height="88" rx="8" fill={muted} stroke={stroke} />
+    </g>
+  );
+
+  const GroupedListPane = () => (
+    <g>
+      <rect x="418" y="64" width="282" height="38" rx="12" fill={surface} stroke={stroke} />
+      <rect x="434" y="78" width="140" height="10" rx="5" fill={muted} />
+      {[
+        [112, 3],
+        [214, 4],
+        [330, 3],
+      ].map(([baseY, n], gi) => (
+        <g key={gi}>
+          <rect x="418" y={baseY} width="100" height="8" rx="4" fill={warn} opacity="0.35" />
+          {Array.from({ length: n }).map((_, ri) => (
+            <rect
+              key={ri}
+              x="418"
+              y={baseY + 16 + ri * 28}
+              width="282"
+              height="22"
+              rx="8"
+              fill={surface}
+              stroke={stroke}
+            />
+          ))}
+        </g>
       ))}
-    </>
+    </g>
+  );
+
+  const SuggestedBundleCards = () => (
+    <g>
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x={206 + i * 168} y="64" width="156" height="72" rx="12" fill={surface} stroke={accent} strokeOpacity="0.5" />
+          <rect x={218 + i * 168} y="78" width="80" height="8" rx="4" fill={muted} />
+          <rect x={218 + i * 168} y="94" width="120" height="6" rx="3" fill={muted} />
+          <rect x={218 + i * 168} y="108" width="100" height="6" rx="3" fill={muted} />
+        </g>
+      ))}
+    </g>
   );
 
   const Modal = () => (
     <g>
-      <rect x="330" y="112" width="300" height="210" rx="16" fill="#0b0b0c" stroke={stroke} />
+      <rect x="18" y="52" width="684" height="332" fill="#000" opacity="0.55" />
+      <rect x="330" y="112" width="300" height="210" rx="16" fill="#0b0b0c" stroke={stroke} strokeWidth="2" />
       <rect x="352" y="134" width="160" height="10" rx="5" fill={muted} />
       {Array.from({ length: 5 }).map((_, i) => (
         <rect key={i} x="352" y={160 + i * 28} width="256" height="18" rx="9" fill={surface} stroke={stroke} />
@@ -100,71 +232,95 @@ function WireframeWeb({
     </g>
   );
 
+  const BottomQuickPickBar = () => (
+    <g>
+      <rect x="206" y="330" width="494" height="64" rx="14" fill="#121214" stroke={stroke} />
+      <rect x="222" y="342" width="120" height="8" rx="4" fill={muted} />
+      {Array.from({ length: 5 }).map((_, i) => (
+        <rect key={i} x={222 + i * 88} y="358" width="76" height="28" rx="14" fill={surface} stroke={accent} strokeOpacity="0.4" />
+      ))}
+    </g>
+  );
+
   const Pattern = () => {
     switch (pattern) {
       case "queueList":
+        /* No sidebar: one wide scanning list */
         return (
           <>
-            <TopBar />
-            <Sidebar />
-            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="180" height="10" rx="5" fill={muted} />
-            <TableRows />
+            <TopBar fullWidth />
+            <rect x="20" y="64" width="680" height="38" rx="12" fill={surface} stroke={stroke} />
+            <rect x="36" y="78" width="200" height="10" rx="5" fill={muted} />
+            <FullWidthRows />
           </>
         );
       case "queuePriority":
+        /* Sidebar + hero “next” card + signal chips + highlighted first row */
         return (
           <>
             <TopBar />
             <Sidebar />
-            <Chips count={3} />
-            <rect x="206" y="96" width="494" height="22" rx="10" fill={surface} stroke={stroke} />
-            <rect x="222" y="104" width="220" height="6" rx="3" fill={muted} />
-            <TableRows withBadges />
+            <rect x="206" y="64" width="240" height="88" rx="14" fill="#121214" stroke={warn} strokeWidth="1.2" />
+            <rect x="222" y="82" width="72" height="8" rx="4" fill={warn} opacity="0.35" />
+            <rect x="222" y="98" width="180" height="10" rx="5" fill={muted} />
+            <rect x="222" y="116" width="140" height="8" rx="4" fill={muted} />
+            <rect x="460" y="64" width="240" height="88" rx="14" fill={surface} stroke={stroke} />
+            <rect x="476" y="82" width="100" height="8" rx="4" fill={muted} />
+            {Array.from({ length: 3 }).map((_, i) => (
+              <rect key={i} x={476 + i * 68} y="102" width="56" height="18" rx="9" fill={muted} />
+            ))}
+            <MainRows startY={168} count={5} priorityFirst />
           </>
         );
       case "queueGrouped":
+        /* Map + grouped list — structurally different from table-only */
         return (
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="250" height="10" rx="5" fill={muted} />
-            <TableRows grouped />
+            <MapZones />
+            <GroupedListPane />
           </>
         );
       case "groupManual":
+        /* Canvas / scratch + pool list — not a standard table */
         return (
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="86" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="84" width="220" height="10" rx="5" fill={muted} />
-            <rect x="222" y="106" width="320" height="10" rx="5" fill={muted} />
-            <TableRows />
+            <rect x="206" y="64" width="300" height="280" rx="14" fill={surface} stroke={stroke} strokeDasharray="6 6" />
+            <rect x="230" y="92" width="72" height="72" rx="36" fill={muted} stroke={stroke} />
+            <rect x="320" y="120" width="64" height="64" rx="32" fill={muted} stroke={stroke} />
+            <rect x="260" y="200" width="80" height="80" rx="40" fill={muted} stroke={stroke} />
+            <rect x="522" y="64" width="178" height="280" rx="14" fill={surface} stroke={stroke} />
+            <rect x="538" y="84" width="100" height="8" rx="4" fill={muted} />
+            {Array.from({ length: 8 }).map((_, i) => (
+              <rect key={i} x="538" y={108 + i * 30} width="146" height="22" rx="8" fill={muted} opacity="0.6" />
+            ))}
           </>
         );
       case "groupSuggested":
+        /* Horizontal suggested bundles + table */
         return (
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="58" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="84" width="210" height="10" rx="5" fill={muted} />
-            <rect x="564" y="78" width="120" height="22" rx="11" fill={muted} />
-            <TableRows withBadges />
+            <SuggestedBundleCards />
+            <MainRows startY={152} count={5} status="labels" />
           </>
         );
       case "groupExplain":
+        /* Narrow table + fixed explain drawer */
         return (
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="72" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="84" width="210" height="10" rx="5" fill={muted} />
-            <rect x="222" y="106" width="360" height="10" rx="5" fill={muted} />
-            <rect x="600" y="100" width="84" height="22" rx="11" fill={muted} />
-            <TableRows withBadges />
+            <MainRows startY={64} count={6} status="labels" rowWidth={302} />
+            <rect x="520" y="64" width="180" height="300" rx="14" fill="#121214" stroke={accent} strokeOpacity="0.45" />
+            <rect x="536" y="84" width="100" height="8" rx="4" fill={muted} />
+            {Array.from({ length: 6 }).map((_, i) => (
+              <rect key={i} x="536" y={104 + i * 22} width="148" height="6" rx="3" fill={muted} />
+            ))}
           </>
         );
       case "scheduleForm":
@@ -176,27 +332,31 @@ function WireframeWeb({
           </>
         );
       case "scheduleQuick":
-        return (
-          <>
-            <TopBar />
-            <Sidebar />
-            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="170" height="10" rx="5" fill={muted} />
-            <Chips count={4} />
-            <rect x="206" y="96" width="494" height="26" rx="10" fill={surface} stroke={stroke} />
-            <rect x="222" y="105" width="200" height="8" rx="4" fill={muted} />
-            <TableRows withBadges />
-          </>
-        );
-      case "scheduleInline":
+        /* Table + bottom sticky time chips */
         return (
           <>
             <TopBar />
             <Sidebar />
             <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
             <rect x="222" y="78" width="180" height="10" rx="5" fill={muted} />
-            <TableRows />
-            <rect x="382" y="264" width="126" height="18" rx="9" fill={muted} />
+            <MainRows startY={118} count={5} status="labels" />
+            <BottomQuickPickBar />
+          </>
+        );
+      case "scheduleInline":
+        /* Row 2 expanded into inline editor block */
+        return (
+          <>
+            <TopBar />
+            <Sidebar />
+            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
+            <rect x="222" y="78" width="180" height="10" rx="5" fill={muted} />
+            <MainRows startY={118} count={2} />
+            <rect x="206" y="186" width="494" height="72" rx="12" fill="#121214" stroke={accent} strokeOpacity="0.5" />
+            <rect x="222" y="202" width="160" height="8" rx="4" fill={muted} />
+            <rect x="222" y="220" width="280" height="8" rx="4" fill={muted} />
+            <rect x="222" y="238" width="200" height="8" rx="4" fill={muted} />
+            <MainRows startY={274} count={4} />
           </>
         );
       case "statusIcons":
@@ -205,8 +365,8 @@ function WireframeWeb({
             <TopBar />
             <Sidebar />
             <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="180" height="10" rx="5" fill={muted} />
-            <TableRows />
+            <rect x="222" y="78" width="200" height="10" rx="5" fill={muted} />
+            <MainRows startY={118} count={7} status="icons" />
           </>
         );
       case "statusLabels":
@@ -215,8 +375,8 @@ function WireframeWeb({
             <TopBar />
             <Sidebar />
             <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="180" height="10" rx="5" fill={muted} />
-            <TableRows withBadges />
+            <rect x="222" y="78" width="200" height="10" rx="5" fill={muted} />
+            <MainRows startY={118} count={7} status="labels" />
           </>
         );
       case "statusA11y":
@@ -224,10 +384,12 @@ function WireframeWeb({
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="220" height="10" rx="5" fill={muted} />
-            <rect x="540" y="76" width="160" height="14" rx="7" fill={muted} />
-            <TableRows withBadges />
+            <rect x="206" y="64" width="494" height="28" rx="10" fill="#1e293b" stroke={accent} strokeOpacity="0.5" />
+            <rect x="222" y="74" width="320" height="8" rx="4" fill={muted} />
+            <rect x="206" y="100" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
+            <rect x="222" y="114" width="220" height="10" rx="5" fill={muted} />
+            <MainRows startY={154} count={5} status="a11y" />
+            <rect x="204" y="188" width="498" height="34" rx="10" fill="none" stroke={accent} strokeWidth="1.5" strokeDasharray="4 3" />
           </>
         );
       case "metricsDashboard":
@@ -235,13 +397,19 @@ function WireframeWeb({
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="90" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="84" width="110" height="28" rx="12" fill={muted} />
-            <rect x="342" y="84" width="110" height="28" rx="12" fill={muted} />
-            <rect x="462" y="84" width="110" height="28" rx="12" fill={muted} />
-            <rect x="582" y="84" width="102" height="28" rx="12" fill={muted} />
-            <rect x="222" y="124" width="240" height="10" rx="5" fill={muted} />
-            <TableRows />
+            <rect x="206" y="64" width="494" height="88" rx="14" fill={surface} stroke={stroke} />
+            <rect x="222" y="82" width="100" height="28" rx="12" fill={muted} />
+            <rect x="332" y="82" width="100" height="28" rx="12" fill={muted} />
+            <rect x="442" y="82" width="100" height="28" rx="12" fill={muted} />
+            <rect x="552" y="82" width="132" height="28" rx="12" fill={muted} />
+            <rect x="222" y="118" width="462" height="22" rx="8" fill={muted} opacity="0.5" />
+            <polyline
+              points="230,150 280,130 330,140 380,110 430,120 480,100 530,115 580,95 630,105"
+              fill="none"
+              stroke={muted}
+              strokeWidth="2"
+            />
+            <MainRows startY={168} count={4} />
           </>
         );
       case "metricsExceptions":
@@ -249,13 +417,13 @@ function WireframeWeb({
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="38" rx="12" fill={surface} stroke={stroke} />
-            <rect x="222" y="78" width="160" height="10" rx="5" fill={muted} />
-            <rect x="392" y="72" width="140" height="22" rx="11" fill={muted} />
-            <rect x="206" y="110" width="494" height="66" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="132" width="290" height="10" rx="5" fill={muted} />
-            <rect x="222" y="152" width="380" height="10" rx="5" fill={muted} />
-            <TableRows withBadges />
+            <rect x="206" y="64" width="494" height="52" rx="12" fill="#2a1818" stroke={danger} strokeOpacity="0.45" />
+            <rect x="222" y="80" width="260" height="10" rx="5" fill={muted} />
+            <rect x="490" y="76" width="96" height="22" rx="11" fill={danger} opacity="0.25" />
+            <rect x="206" y="126" width="494" height="56" rx="12" fill="#2a1818" stroke={danger} strokeOpacity="0.35" />
+            <rect x="222" y="142" width="300" height="8" rx="4" fill={muted} />
+            <rect x="222" y="158" width="360" height="8" rx="4" fill={muted} />
+            <MainRows startY={198} count={5} status="labels" />
           </>
         );
       case "metricsHybrid":
@@ -264,12 +432,14 @@ function WireframeWeb({
           <>
             <TopBar />
             <Sidebar />
-            <rect x="206" y="64" width="494" height="60" rx="14" fill={surface} stroke={stroke} />
-            <rect x="222" y="84" width="120" height="10" rx="5" fill={muted} />
-            <rect x="352" y="78" width="120" height="22" rx="11" fill={muted} />
-            <rect x="482" y="78" width="120" height="22" rx="11" fill={muted} />
-            <rect x="612" y="78" width="88" height="22" rx="11" fill={muted} />
-            <TableRows withBadges />
+            <rect x="206" y="64" width="494" height="56" rx="14" fill={surface} stroke={stroke} />
+            <rect x="222" y="80" width="72" height="20" rx="10" fill={muted} />
+            <rect x="302" y="80" width="72" height="20" rx="10" fill={muted} />
+            <rect x="382" y="80" width="72" height="20" rx="10" fill={muted} />
+            <rect x="470" y="78" width="120" height="24" rx="12" fill="#2a1818" stroke={danger} strokeOpacity="0.35" />
+            <rect x="598" y="80" width="88" height="20" rx="10" fill={muted} />
+            <rect x="222" y="108" width="200" height="6" rx="3" fill={muted} />
+            <MainRows startY={132} count={6} status="labels" />
           </>
         );
     }

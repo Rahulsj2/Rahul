@@ -19,12 +19,12 @@ export function AppleCaseStudyContent() {
           <div className="mb-[64px] grid grid-cols-2 items-start gap-[56px] max-[600px]:grid-cols-1 max-[600px]:gap-[36px]">
             <div>
               <p className="mb-[20px] text-[10px] uppercase tracking-[0.14em] text-[#9a9992]">
-                Service Design &nbsp;·&nbsp; Ongoing
+                Design & Support &nbsp;·&nbsp; Ongoing
               </p>
               <h1 className="mb-[18px] text-[42px] font-normal leading-[1.12] tracking-[-0.6px] max-[600px]:text-[34px]">
                 Retail
                 <br />
-                Support
+                Tools & Systems
               </h1>
               <p className="text-[13px] italic leading-[1.85] text-[#9a9992]">
                 Designing internal tools & systems for retail performance, and talent development.
