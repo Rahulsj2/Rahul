@@ -69,10 +69,10 @@ export function AppleCaseStudyContent() {
               Long story short
             </p>
             <p className="mb-[18px] max-w-[540px] text-[28px] font-normal leading-[1.4] text-[#1a1a18]">
-              Designing for people, inside one of the world&apos;s most demanding service environments.
+              Designing internal tool&apos;s and systems for most demanding service environments.
             </p>
             <p className="max-w-[500px] text-[13px] leading-[1.9] text-[#9a9992]">
-              Managing a large cross-functional team gave me direct access to a complex service system
+              Managing a large cross-functional team of over 200 people gave me direct access to a complex service system
               and the responsibility to improve it. I approached it the way a designer would:
               observing behavior, uncovering gaps, and designing structures that remove uncertainty.
             </p>
