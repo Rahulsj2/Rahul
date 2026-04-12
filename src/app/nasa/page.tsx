@@ -376,12 +376,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start">
                 <div className="w-full pl-24">
                   <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Discover the cosmos.
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Experience space. 
                     </p>
                   </span>   
@@ -423,12 +423,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start justify-center">
                 <div className="w-full text-center">
                   <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-center w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-center w-full">
                       Smart themes that 
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-center w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-center w-full">
                       change overtime.
                     </p>
                   </span>
@@ -465,12 +465,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start justify-center">
                 <div className="w-full">
                   <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Follow space missions
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                        and events.
                     </p>
                   </span>
@@ -512,12 +512,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start">
                 <div className="w-full pl-44">
                   <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Discover rare events
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       and recent discoveries.
                     </p>
                   </span>
@@ -555,12 +555,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start">
                 <div className="w-full pl-24">
                   <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       A new way to look up and appreciate 
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       NASA's Image of the Day.
                     </p>
                   </span>
@@ -613,12 +613,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start">
                 <div className="w-full pl-24">
                   {/* <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Discover the cosmos.
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       Experience space.
                     </p>
                   </span> */}
@@ -691,12 +691,12 @@ export default function NasaPage() {
               <div className="flex h-full items-start">
                 <div className="w-full pl-24">
                   {/* <span>
-                    <p className="-mt-6 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       A new way to look up and appreciate
                     </p>
                   </span>
                   <span>
-                    <p className="-mt-4 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[48px] font-normal tracking-[0.03em] text-transparent text-left w-full">
+                    <p className="-mt-2 bg-gradient-to-r from-[#006C48] to-[#A13462] bg-clip-text text-[32px] font-normal tracking-[0.03em] text-transparent text-left w-full">
                       NASA&apos;s Image of the Day.
                     </p>
                   </span> 

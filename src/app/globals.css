@@ -148,6 +148,18 @@
   }
 }
 
+/* Flux case study — selected text: accent color, no highlight fill */
+[data-flux-page]::selection,
+[data-flux-page] *::selection {
+  background-color: transparent;
+  color: #015d3e;
+}
+[data-flux-page]::-moz-selection,
+[data-flux-page] *::-moz-selection {
+  background-color: transparent;
+  color: #015d3e;
+}
+
 @layer base {
   body {
     @apply bg-background-primary text-foreground-primary antialiased;

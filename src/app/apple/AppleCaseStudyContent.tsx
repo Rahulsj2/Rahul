@@ -1,9 +1,10 @@
 export function AppleCaseStudyContent() {
   return (
     <div className="relative w-full bg-background-primary" style={{ color: "#1a1a18" }}>
+      {/* Hero — same shell as Flux (`mx-[9px] px-5` gutter + full-height rounded frame) */}
       <section className="relative w-full h-[calc(100dvh-7rem)] max-h-[calc(100dvh-7rem)] overflow-hidden bg-background-primary">
         <div className="mx-[9px] px-5 h-full">
-          <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[22px] bg-[#f5f4f0] shadow-[0_20px_80px_rgba(0,0,0,0.06)]">
+          <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[22px] bg-[#f5f4f0]">
             <img
               src="https://cdn.simpleicons.org/apple/737373"
               alt="Apple"
@@ -73,8 +74,8 @@ export function AppleCaseStudyContent() {
             </p>
             <p className="max-w-[500px] text-[13px] leading-[1.9] text-[#9a9992]">
               Managing a large cross-functional team of over 200 people gave me direct access to a complex service system
-              and the responsibility to improve it. I approached it the way a designer would:
-              observing behavior, uncovering gaps, and designing structures that remove uncertainty.
+              and the responsibility to improve it. I did this by observing behavior, uncovering gaps, and designing structures 
+              that removed uncertainty.
             </p>
           </div>
 
