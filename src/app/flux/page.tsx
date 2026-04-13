@@ -49,13 +49,13 @@ const experimentBlockGap = "mt-16 w-full md:mt-24";
 
 /** Scheduling pickups / Update shipment — equal-height card shells; GIF stays 528px, copy lives inside */
 const twinShipCardShell =
-  "relative flex w-full min-h-[760px] flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#1E1E20] p-3 md:p-4";
-/** GIF + caption stacked; `justify-center` centers the pair; caption offset uses `experimentMediaGap` like WCAG block */
+  "relative flex w-full min-h-[720px] flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#1E1E20] p-3 md:p-4";
+/** GIF + caption stacked; top-anchored so left/right media align */
 const twinShipCardBody =
-  "flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-0 self-stretch";
-/** Same `mt-8` as copy → card under “Designed to meet WCAG 2.1 AA standards” */
-const twinShipCaptionRail = `${experimentMediaGap} max-w-[min(100%,398px)] shrink-0 sm:max-w-[398px]`;
-const twinShipCaptionRailWide = `${experimentMediaGap} max-w-[min(100%,515px)] shrink-0 sm:max-w-[515px]`;
+  "flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-0 self-stretch pt-14 md:pt-16";
+/** Tighter caption gap under GIFs (twin cards only) */
+const twinShipCaptionRail = `mt-4 w-full max-w-[min(100%,398px)] shrink-0 sm:max-w-[398px]`;
+const twinShipCaptionRailWide = `mt-4 w-full max-w-[min(100%,515px)] shrink-0 sm:max-w-[515px]`;
 const twinShipCaptionCopy = "w-full text-left";
 
 /** Matches `FluxA11yAccessibilityTabs` image panel pill (WCAG card) */
@@ -307,10 +307,12 @@ export default function FluxPage() {
             {/* Same max width as the tab card (96%): copy and card share one column, text left-aligned */}
             <div className={experimentContentWidth}>
               <div className={experimentTextStack}>
-                <h4 className={experimentSubtitle}>Pickup Scheduling Iterations</h4>
+                <h4 className={experimentSubtitle}>Finding the right scheduling experience</h4>
                 <p className={experimentBody}>
-                We went with the card layout where agents could see multiple pickup windows at once and 
-                confirm in one pass. The form front-loaded too much and inline made comparing awkward. 
+                We tested three approaches. A form front-loaded agents had to work through 
+                it. An inline layout which fragmented the flow. The card layout worked best: 
+                 : it presents pickup times based on what agents already have scheduled, so they can 
+                review and confirm in one pass.
                 </p>
               </div>
               {/* <ul className="mt-6 list-[circle] list-outside pl-6 space-y-3 text-[0.958rem] leading-relaxed text-white/75 [&_li]:marker:text-[0.4em]">
@@ -348,11 +350,11 @@ export default function FluxPage() {
 
               <div className={`${experimentBlockGap} flex flex-col`}>
                 <div className={experimentTextStack}>
-                  <h4 className={experimentSubtitle}>Claim Shipments iterations</h4>
+                  <h4 className={experimentSubtitle}>Claiming shipments without the mental gymnastics</h4>
                   <p className={experimentBody}>
-                  The grouped table passed usability testing with a toggle between date and zone views. 
-                  Related shipments sit together, so agents can decide what to claim next without scanning
-                   a flat list or juggling a split view resulting in faster decisions, more confident picks.
+                  Three layouts. The grouped table is what stuck. Related shipments sit together, with a toggle between 
+                  date and zone views so agents can decide what to claim next without scanning a flat list or juggling
+                   a split view. Faster decisions, more confident picks.
                   </p>
                 </div>
                 <div className={experimentMediaGap}>
@@ -385,20 +387,21 @@ export default function FluxPage() {
         >
           <div className="mx-[9px] px-5 w-full pt-12 pb-24 text-left md:pb-32">
             {/* Same horizontal band as Design Experiments: 4 + 6 + 2 */}
-            <div className="grid w-full grid-cols-12 gap-lg text-left">
+            {/* <div className="grid w-full grid-cols-12 gap-lg text-left">
               <div className="col-span-12 md:col-span-4 px-[10px]" />
               <div className="col-span-12 md:col-span-6 px-[10px]">
                 <h2 className={experimentSectionTitle}>Advocating for Accessibility</h2>
               </div>
               <div className="col-span-12 md:col-span-2 px-[10px]" />
-            </div>
+            </div> */}
             {/* Same layout as Design Experiments: 96% column, subtitle + body + media */}
             <div className={experimentContentWidth}>
               <div className={experimentTextStack}>
-                <h4 className={experimentSubtitle}>Designed to meet WCAG 2.1 AA standards</h4>
+                <h4 className={experimentSubtitle}>Built for every agent, on every device</h4>
                 <p className={experimentBody}>
-                  Accessibility was a recurring bar for every iteration. Each prototype cycle included
-                  keyboard paths, focus order, and screen-reader labels for the core agent flows.
+                Accessibility wasn't a checklist item, it was a design constraint from the start. 
+                Every iteration was tested against WCAG 2.1 AA standards, with keyboard navigation, 
+                focus indicators, and screen reader labels baked into the core agent flows.
                 </p>
               </div>
               <div className={`${experimentMediaGap} mb-8 md:mb-10`}>
@@ -418,16 +421,16 @@ export default function FluxPage() {
           <div className="grid w-full grid-cols-12 gap-lg text-left">
             <div className="col-span-12 md:col-span-4 px-[10px]" />
             <div className="col-span-12 md:col-span-6 px-[10px]">
-              <h2 className={experimentSectionTitle}>Final Designs Shipped</h2>
+              <h2 className={experimentSectionTitle}>The Finished Product</h2>
             </div>
             <div className="col-span-12 md:col-span-2 px-[10px]" />
           </div>
           <div className={experimentContentWidth}>
             <div className={experimentTextStack}>
-              <h4 className={experimentSubtitle}>All shipments in one place.</h4>
+              <h4 className={experimentSubtitle}>All the context. Right where you need it.</h4>
               <p className={experimentBody}>
-                A single place to review shipments before committing so agents don’t rely on memory
-                or scattered messages.
+              Agents get everything in one place address, package details, and shipment information 
+              without jumping between screens or hunting for context.
               </p>
             </div>
             <div className={experimentMediaGap}>
@@ -447,10 +450,11 @@ export default function FluxPage() {
         <div className="mx-[9px] px-5 w-full pt-12 pb-24 text-left md:pb-32">
           <div className={experimentContentWidth}>
             <div className={experimentTextStack}>
-              <h4 className={experimentSubtitle}>Smarter groupings and schedules.</h4>
+              <h4 className={experimentSubtitle}>Shipments that fit together.</h4>
               <p className={experimentBody}>
-                System suggested pickup groupings surface route feasibility and conflicts upfront,
-                helping agents commit faster with fewer scheduling collisions.
+              Rather than leaving agents to manually piece together compatible pickups, the 
+              system suggests groupings upfront  surfacing route feasibility and conflicts 
+              before anything gets committed. Agents spend less time second-guessing and fewer runs end in scheduling collisions.
               </p>
             </div>
             <div className={experimentMediaGap}>
@@ -471,10 +475,10 @@ export default function FluxPage() {
         <div className="mx-[9px] px-5 w-full pt-12 pb-24 text-left md:pb-32">
           <div className={experimentContentWidth}>
             <div className={experimentTextStack}>
-              <h4 className={experimentSubtitle}>The pickup queue, at a glance.</h4>
+              <h4 className={experimentSubtitle}>Every claimed shipment, in order.</h4>
               <p className={experimentBody}>
-                A prioritized pickup queue makes the next best decision obvious: what to take, what
-                to defer, and why.
+              Every claimed shipment, organized by what matters most. Deadlines, package types, read status,
+               and expedited flags surface upfront so agents always know what to take, what to defer, and why.
               </p>
             </div>
             <div className={experimentMediaGap}>
@@ -499,7 +503,7 @@ export default function FluxPage() {
                       SCHEDULING PICKUPS
                     </span>
                     <div className={twinShipCardBody}>
-                      <div className="relative h-[528px] w-[min(100%,398px)] shrink-0 overflow-hidden rounded-[16px] bg-black sm:w-[398px] md:mt-7">
+                      <div className="relative h-[528px] w-[min(100%,398px)] shrink-0 overflow-hidden rounded-[16px] bg-black sm:w-[398px]">
                         <Image
                           src="/gifs/claim.gif"
                           alt="Claim flow — motion and layout in the product"
@@ -511,8 +515,7 @@ export default function FluxPage() {
                       </div>
                       <div className={twinShipCaptionRail}>
                         <p className={`${twinShipCaptionCopy} ${body}`}>
-                          Agents claim and schedule pickups in seconds, balancing time windows and personal
-                          capacity without back-and-forth coordination.
+                          No juggling time windows. Agents see what fits, claim it, and get moving.
                         </p>
                       </div>
                     </div>
