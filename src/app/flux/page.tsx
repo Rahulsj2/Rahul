@@ -136,7 +136,7 @@ export default function FluxPage() {
                   <div className="space-y-1.5">
                     <p className={body}>UX Research</p>
                     <p className={body}>UI Design</p>
-                    <p className={body}>Iterative prototyping </p>
+                    <p className={body}>Iterative Prototyping </p>
                   </div>
                 </div>
                 <div className="w-full md:w-max md:max-w-full md:flex-none md:shrink-0">
