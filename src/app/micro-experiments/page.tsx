@@ -6,7 +6,7 @@ import { AnimatedShippingGroupedQueue } from "@/components/AnimatedShippingGroup
 
 export const metadata = {
   title: "Micro experiments",
-  description: "Micro experiments — fast tests, evidence, and decisions shipped.",
+  description: "Micro experiments —cfddvr fast tests, evidence, and decisions shipped.",
 };
 
 const label = "text-base font-medium tracking-[0.12em] text-white/70";
