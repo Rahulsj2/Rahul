@@ -131,6 +131,149 @@
   animation-delay: 190ms;
 }
 
+/* Home hero — first pass: clip-path wipe + bar sweep */
+@keyframes home-hero-text-wipe {
+  from {
+    /* Slight negative top/bottom prevents glyph descenders from clipping */
+    clip-path: inset(-0.25em 100% -0.65em 0);
+  }
+  to {
+    clip-path: inset(-0.25em 0% -0.65em 0);
+  }
+}
+
+@keyframes home-hero-bar-sweep {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    left: calc(100% - 3px);
+    opacity: 0;
+  }
+}
+
+@keyframes home-hero-a11y-lean {
+  0% {
+    transform: translateY(-50%) translateX(calc(3px + 10px)) rotate(-10deg);
+  }
+  25% {
+    transform: translateY(calc(-50% - 6px)) translateX(calc(3px + 10px)) rotate(-14deg);
+  }
+  55% {
+    transform: translateY(-50%) translateX(calc(3px + 10px)) rotate(-6deg);
+  }
+  100% {
+    transform: translateY(-50%) translateX(calc(3px + 10px)) rotate(0deg);
+  }
+}
+
+@keyframes home-hero-a11y-dust {
+  0% {
+    opacity: 0;
+    transform: translate(-10px, -50%) scale(0.85);
+  }
+  12% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-120px, -50%) scale(1.35);
+  }
+}
+
+@keyframes home-hero-after-reveal-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-hero-reveal-wrap {
+  position: relative;
+  overflow: visible;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.home-hero-after-reveal {
+  opacity: 0;
+  animation: home-hero-after-reveal-fade 520ms ease-out 4.18s both;
+}
+
+.home-hero-after-reveal--top {
+  animation-delay: 4.18s;
+}
+
+.home-hero-after-reveal--bottom {
+  animation-delay: 4.85s;
+}
+
+.home-hero-reveal__text {
+  position: relative;
+  z-index: 1;
+  clip-path: inset(0 100% 0 0);
+  animation: home-hero-text-wipe 1.85s linear 0.48s both;
+}
+
+.home-hero-reveal__a11y {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 2;
+  width: 6rem;
+  height: 6rem;
+  color: #1d1d1f;
+  filter: drop-shadow(0 0 12px rgba(29, 29, 31, 0.22));
+  pointer-events: none;
+  transform: translateY(-50%) translateX(calc(3px + 10px));
+  transform-origin: 20% 70%;
+  animation:
+    home-hero-bar-sweep 1.85s linear 0.48s both,
+    home-hero-a11y-lean 1.85s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
+}
+
+.home-hero-reveal__a11y::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  z-index: -1;
+  width: 170px;
+  height: 92px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 58%, rgba(29, 29, 31, 0.42) 0 10px, transparent 11px),
+    radial-gradient(circle at 34% 40%, rgba(29, 29, 31, 0.34) 0 9px, transparent 10px),
+    radial-gradient(circle at 50% 64%, rgba(29, 29, 31, 0.28) 0 8px, transparent 9px),
+    radial-gradient(circle at 68% 46%, rgba(29, 29, 31, 0.22) 0 7px, transparent 8px),
+    radial-gradient(circle at 82% 60%, rgba(29, 29, 31, 0.18) 0 6px, transparent 7px);
+  filter: blur(1px);
+  transform: translate(-10px, -50%);
+  opacity: 0;
+  mix-blend-mode: multiply;
+  animation: home-hero-a11y-dust 760ms ease-out 0.48s infinite;
+}
+
+/* Second line: start after line 1 finishes (delay + duration) */
+.home-hero-reveal-wrap--line2 .home-hero-reveal__text {
+  animation-delay: calc(0.48s + 1.85s);
+}
+
+.home-hero-reveal-wrap--line2 .home-hero-reveal__a11y {
+  opacity: 0;
+  animation:
+    home-hero-bar-sweep 1.85s linear calc(0.48s + 1.85s) forwards,
+    home-hero-a11y-lean 1.85s cubic-bezier(0.22, 1, 0.36, 1) calc(0.48s + 1.85s) forwards;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -145,6 +288,27 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .home-hero-reveal__text {
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  .home-hero-reveal__a11y {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .home-hero-reveal__a11y::before {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .home-hero-after-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Accessibility } from "lucide-react";
 import { CredoBlock } from "@/components/CredoBlock";
 import { SectionSpy } from "@/components/SectionSpy";
 import { WorkScrollIndicator } from "@/components/WorkScrollIndicator";
@@ -38,17 +39,38 @@ export default function HomePage() {
             <div className="mx-auto flex w-full max-w-[1440px] flex-col items-start justify-center px-xs lg:px-sm gap-lg text-left pt-3xl md:pt-[7rem]">
               {/* Group 1: Name */}
               <div className="flex flex-col">
-                <h1 className="text-[1.125rem] font-semibold tracking-tight" style={{ color: "#737373" }}>
+                <h1 className="home-hero-after-reveal home-hero-after-reveal--top text-[1.125rem] font-semibold tracking-tight" style={{ color: "#737373" }}>
                   Rahul Srinivas
                 </h1>
               </div>
 
               {/* Group 2: Prototyping line + bio paragraphh */}
               <div className="flex flex-col gap-md">
-                <p className="text-[4.5rem] font-light tracking-tight leading-[1.1]" style={{ color: "#1d1d1f" }}>
-                  Designing A11y experiences for iOS <br /> and enterprise tools
-                </p>
-                <p className="text-body leading-relaxed max-w-2xl" style={{ color: "#1d1d1f" }}>
+                <div className="flex flex-col gap-0">
+                  <div className="home-hero-reveal-wrap">
+                    <p
+                      className="home-hero-reveal__text text-[4.5rem] font-light tracking-tight leading-[1.1]"
+                      style={{ color: "#1d1d1f" }}
+                    >
+                      Designing A11y experiences for iOS
+                    </p>
+                    <span className="home-hero-reveal__a11y" aria-hidden>
+                      <Accessibility className="h-full w-full" strokeWidth={1.1} />
+                    </span>
+                  </div>
+                  <div className="home-hero-reveal-wrap home-hero-reveal-wrap--line2">
+                    <p
+                      className="home-hero-reveal__text text-[4.5rem] font-light tracking-tight leading-[1.1]"
+                      style={{ color: "#1d1d1f" }}
+                    >
+                      and enterprise tools
+                    </p>
+                    <span className="home-hero-reveal__a11y" aria-hidden>
+                      <Accessibility className="h-full w-full" strokeWidth={1.1} />
+                    </span>
+                  </div>
+                </div>
+                <p className="home-hero-after-reveal home-hero-after-reveal--bottom text-body leading-relaxed max-w-2xl" style={{ color: "#1d1d1f" }}>
                 Designer with a <span className="underline text-gray-500">technical foundation</span> specializing in <span className="underline text-gray-500">accessible experiences</span> from the ground up 
                 across <span className="underline text-gray-500">iOS products</span>, <span className="underline text-gray-500">enterprise tools</span>, and <span className="underline text-gray-500">AI systems</span>. 
                 </p>

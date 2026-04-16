@@ -300,7 +300,7 @@ export default function FluxPage() {
             <div className="grid w-full grid-cols-12 gap-lg text-left">
               <div className="col-span-12 md:col-span-4 px-[10px]" />
               <div className="col-span-12 md:col-span-6 px-[10px]">
-                <h2 className={experimentSectionTitle}>Design Experiments</h2>
+                <h2 className={experimentSectionTitle}>The Work Behind the Work</h2>
               </div>
               <div className="col-span-12 md:col-span-2 px-[10px]" />
             </div>
@@ -560,10 +560,10 @@ export default function FluxPage() {
         <div className="mx-[9px] px-5 w-full pt-12 pb-12 text-left md:pb-16">
           <div className={experimentContentWidth}>
             <div className={experimentTextStack}>
-              <h4 className={experimentSubtitle}>Performance at a glance.</h4>
+              <h4 className={experimentSubtitle}>Your day, before it gets away from you.</h4>
               <p className={experimentBody}>
-                A lightweight dashboard highlights activity and exceptions so agents can correct the
-                day early, not after problems cascade.
+                Shipment activity, performance metrics, payments, and earnings all in one view. 
+                Agents know exactly where they stand, at any point in the day.
               </p>
             </div>
             <div className={experimentMediaGap}>

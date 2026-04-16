@@ -38,20 +38,20 @@ const TABS = [
 ] as const;
 
 const pill =
-  "pointer-events-none absolute left-3 top-3 z-10 select-none rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-white/35 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
+  "pointer-events-none absolute left-2 top-2 z-10 select-none rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-white/35 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
 
 const compactPillDimmed =
-  "pointer-events-none absolute left-3 top-3 z-10 select-none rounded-full border border-white/[0.07] bg-transparent px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-white/32 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
+  "pointer-events-none absolute left-2 top-2 z-10 select-none rounded-full border border-white/[0.07] bg-transparent px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-white/32 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
 
 const compactPillChosen =
-  "pointer-events-none absolute left-3 top-3 z-10 select-none rounded-full border border-emerald-800/50 bg-emerald-950/45 px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-emerald-400/95 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
+  "pointer-events-none absolute left-2 top-2 z-10 select-none rounded-full border border-emerald-800/50 bg-emerald-950/45 px-3 py-1.5 text-[0.65rem] font-medium tracking-[0.06em] text-emerald-400/95 shadow-none backdrop-blur-[6px] md:left-5 md:top-5 md:px-3.5 md:py-2 md:text-[0.68rem]";
 
 const btnBase =
   "inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg border px-4 py-2.5 text-center text-[0.8125rem] font-medium tracking-[0.02em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40 sm:min-w-[9.5rem] sm:px-5";
 
 /** Experiment 03 wireframes — same frame + scale as Micro experiments portrait (360×380). */
 const compactSchedulingWireWrap =
-  "pointer-events-none absolute inset-0 z-[1] flex items-center justify-center overflow-hidden px-1 pb-2 pt-10 md:px-2 md:pt-11";
+  "pointer-events-none absolute inset-0 z-[1] flex items-center justify-center overflow-hidden px-1 pb-3 pt-9 md:px-2 md:pt-11";
 const compactSchedulingWireSize =
   "aspect-[360/380] h-auto w-full max-w-[min(100%,320px)]";
 /** Experiment 06 first card — landscape 720×420; wider cap than portrait scheduling wireframes. */
@@ -108,7 +108,7 @@ export function FluxA11yAccessibilityTabs({
               ? (compactRegionLabel ?? "Pickup scheduling iterations")
               : "Accessibility design experiments"
           }
-          className="flex w-full gap-3 md:gap-4 aspect-[12/3.5]"
+          className="flex w-full flex-col gap-3 md:flex-row md:gap-4 md:aspect-[12/3.5]"
         >
           {TABS.map((t, i) => {
             const pillText = compactPillLabels?.[i] ?? t.label;
@@ -132,10 +132,10 @@ export function FluxA11yAccessibilityTabs({
             const isDimmed = hasPick && i !== compactChosenIndex;
             const cardShell =
               isChosen
-                ? "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border-2 border-emerald-800/55 bg-[#0a1411] shadow-[0_0_0_1px_rgba(6,95,70,0.35)]"
+                ? "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border-2 border-emerald-800/55 bg-[#0a1411] shadow-[0_0_0_1px_rgba(6,95,70,0.35)] max-md:w-full max-md:h-[460px] max-md:max-w-[420px] max-md:mx-auto"
                 : isDimmed
-                  ? "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border border-white/[0.06] bg-[#121213] opacity-[0.58]"
-                  : "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border border-white/10";
+                  ? "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border border-white/[0.06] bg-[#121213] opacity-[0.58] max-md:w-full max-md:h-[460px] max-md:max-w-[420px] max-md:mx-auto"
+                  : "relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[28px] border border-white/10 max-md:w-full max-md:h-[460px] max-md:max-w-[420px] max-md:mx-auto";
             const pillClass = isChosen ? compactPillChosen : isDimmed ? compactPillDimmed : pill;
             return (
               <div key={pillText} className={cardShell}>
