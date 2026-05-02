@@ -25,6 +25,14 @@
   /* Custom cursor — corner bracket with white border for visibility on light and dark */
   --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 2 2, auto;
   --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 2 2, pointer;
+  /* Work cards — bracket + dot “open” affordance; falls back to zoom-in */
+  --cursor-work-card-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M2 2h11M2 2v11' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='14.5' cy='13.5' r='3' fill='white'/%3E%3Ccircle cx='14.5' cy='13.5' r='2.25' fill='%231d1d1f'/%3E%3C/svg%3E") 2 2, zoom-in;
+}
+
+/* Work carousel — only real links use the “open” cursor on hover */
+.work-card:is(a):hover,
+.work-card:is(a):focus-visible {
+  cursor: var(--cursor-work-card-hover);
 }
 
 /* Focus visible for keyboard (accessibility) */
@@ -220,7 +228,7 @@
   position: relative;
   z-index: 1;
   clip-path: inset(0 100% 0 0);
-  animation: home-hero-text-wipe 1.85s linear 0.48s both;
+  animation: home-hero-text-wipe 1.85s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.48s both;
 }
 
 .home-hero-reveal__a11y {
@@ -236,7 +244,7 @@
   transform: translateY(-50%) translateX(calc(3px + 10px));
   transform-origin: 20% 70%;
   animation:
-    home-hero-bar-sweep 1.85s linear 0.48s both,
+    home-hero-bar-sweep 1.85s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.48s both,
     home-hero-a11y-lean 1.85s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
 }
 
@@ -265,12 +273,14 @@
 /* Second line: start after line 1 finishes (delay + duration) */
 .home-hero-reveal-wrap--line2 .home-hero-reveal__text {
   animation-delay: calc(0.48s + 1.85s);
+  /* Continue from line 1’s end speed: start fast instead of re-easing-in */
+  animation-timing-function: cubic-bezier(0.15, 0.9, 0.25, 1);
 }
 
 .home-hero-reveal-wrap--line2 .home-hero-reveal__a11y {
   opacity: 0;
   animation:
-    home-hero-bar-sweep 1.85s linear calc(0.48s + 1.85s) forwards,
+    home-hero-bar-sweep 1.85s cubic-bezier(0.15, 0.9, 0.25, 1) calc(0.48s + 1.85s) forwards,
     home-hero-a11y-lean 1.85s cubic-bezier(0.22, 1, 0.36, 1) calc(0.48s + 1.85s) forwards;
 }
 

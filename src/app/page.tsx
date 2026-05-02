@@ -50,7 +50,7 @@ export default function HomePage() {
                   <div className="home-hero-reveal-wrap">
                     <p
                       className="home-hero-reveal__text text-[4.5rem] font-light tracking-tight leading-[1.1]"
-                      style={{ color: "#1d1d1f" }}
+                      style={{ color: "#2a2a2c" }}
                     >
                       Designing A11y experiences for iOS
                     </p>
@@ -61,7 +61,7 @@ export default function HomePage() {
                   <div className="home-hero-reveal-wrap home-hero-reveal-wrap--line2">
                     <p
                       className="home-hero-reveal__text text-[4.5rem] font-light tracking-tight leading-[1.1]"
-                      style={{ color: "#1d1d1f" }}
+                      style={{ color: "#2a2a2c" }}
                     >
                       and enterprise tools
                     </p>
